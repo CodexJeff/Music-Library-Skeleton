@@ -1,0 +1,82 @@
+=================================================
+=================================================
+MyTunes music library
+Command Language Version 0.1 (Alpha) Sept 2019
+=================================================
+COMMANDS:
+
+add //add data to collections
+    //add recordings
+    add -r recording_id title artist producer year
+    add -r 103 "Beatles For Sale" "Beatles" "George Martin" 1964
+    //add songs
+    add -s song_id title composer //add song
+	add -s 1001 "Misery" "Paul McCartney, John Lennon"
+    //add tracks
+    add -t album_id songID track_number
+    add -t 100 1000 1
+    //add users
+    add -u user_id name
+    add -u ajones "Anne Jones"
+    //add playlists
+    add -p user_id, playlist_name
+    add -p ajones "Driving Songs"
+    //add playlist tracks
+    add -l user_id playlist_name song_id
+    add -l ajones "Driving Songs" 1001 
+   
+delete  //delete data from collections
+    delete -s song_id //delete song
+    delete -s song_id -p playlist_name -u user_name //delete song from playlist
+    delete -Global -s song_id -p playlist_name -u user_name
+    delete -r recording_id //delete recording 
+    delete -u user_id //delete user
+    delete -p playist_name -u user_id //delete user playlist
+    delete -t song_id recording_id //delete track
+
+show    //show entries in collections
+    show songs
+    show users
+    show playlists -u user_id
+    show songs -u user_id -p playlist_name
+    show recordings
+    show tracks
+
+UI SHELL COMMANDS (start with a dot):
+
+.quit   //quit the application
+
+.read   //read a script file
+	.read filename
+
+.log    //log commands and output
+        //THIS DOT COMMAND IS SCRIPTABLE
+	.log clear //clear the logs
+	.log start //begin logging commands only
+	.log start_output //begin logging output only
+	.log start_both  //begin logging commands and output
+	.log stop //stop logging
+	.log save filename //save log to filename
+        .log show //display current log contents on console
+
+.help   //show this help menu
+
+//   //comments
+     Any input starting with "//" or any output
+     starting with "//" is treated as a comment.
+     If input on CLI the comment will be written to log file.
+     Comments may appear in command script file.
+
+DEVELOPER COMMANDS (NOT FOR PRODUCTION):
+//These provide are to test certain developer functions
+.trim    //trim the argument
+	.trim "  a   day ago" //a day ago
+.startsWith    //test string prefix
+	.startsWith "Hello" "Hel" //true
+.endsWith    //test string suffix
+	.endsWith "Hello" "llo" //true
+.toTitleCase    //returns title cased string
+	.toTitleCase "the girl from ipanema" //Girl From Ipanema, The
+==========================================================
+==========================================================
+
